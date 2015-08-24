@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Joyce Liu
 tagline:          'Seattle Software Engineer'
-description:      'A software engineer and foreign language enthusiast living in Seattle'
+description:      'Software engineer and foreign language enthusiast living in Seattle'
 url:              liujoycec.github.io
 baseurl:          /
 
