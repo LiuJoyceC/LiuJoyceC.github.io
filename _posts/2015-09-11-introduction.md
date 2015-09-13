@@ -21,6 +21,8 @@ I've been impressed with the large variety of libraries, frameworks, and modules
 
 D3 was pretty fun too, and I got to write a cute Mario-Kart-themed Collider game using that library during the second week. [Check it out here!](http://codepen.io/LiuJoyceC/full/XmrLdQ/) Drag the players around with your mouse to avoid getting hit by the flying Koopa shells.
 
+The most difficult part of this whole experience: missing out on a social life. So many birthdays, housewarmings, and going-away parties where I couldn't be there for some of my closest friends. I even get paranoid sometimes and wonder if my friends will eventually forget I exist. My weekends only consist of Sunday, so I try to go out with friends on Saturday night if I manage to finish my assignments before the end of the night. In the first two weeks, I thought the perfect way to unwind after such a long week was to get drunk with friends. However, I quickly realized that when you only have a one-day weekend, it is not worth it to spend that entire day hungover and not able to truly relax. Then Monday just comes too quickly and you feel like you got no break at all. So the secret to not burning out is to go have fun with friends but NOT get too drunk. Then I can enjoy a wonderful Sunday and feel slightly more refreshed on Monday.
+
 Despite being sleep-deprived and having very little of a social life for 3 months, I'm so stoked about how much I'm learning and can't wait to unleash these mad skills in the real world in just a few months!
 
 
