@@ -15,6 +15,10 @@ title: Home
     <span class="post-date">{{ post.date | date_to_string }}</span>
 
     {{ post.content }}
+    <!-- Disqus comment count -->
+    <div>
+      <a href="{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url }}"></a>
+    </div>
   </div>
   {% endfor %}
 </div>
@@ -36,3 +40,15 @@ title: Home
   {% endif %}
 </div>
 <!--<div align=center><a href='http://www.counter12.com'><img src='http://www.counter12.com/img-75C5cbZA-26.gif' border='0' alt='free counter'></a><script type='text/javascript' src='http://www.counter12.com/ad.js?id=75C5cbZA'></script></div>-->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'liujoycec';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
