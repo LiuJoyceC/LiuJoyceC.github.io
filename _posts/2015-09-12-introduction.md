@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: My First Weeks at Hack Reactor Remote Beta
 ---
 
