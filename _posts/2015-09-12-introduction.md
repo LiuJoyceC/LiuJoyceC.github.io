@@ -14,7 +14,7 @@ Hey everyone! I recently decided to quit my job as an actuary and dive into a ca
 
 ### My Experience So Far
 
-So I lied when I said the program is only 3 months long. Our first several required assignments were due before Day 1 of the program, so we technically had an extra month. I won't give specific details because I think I'm bound to secrecy about their curriculum, but we each had to create a dynamic website and rewrite Javascript libraries from scratch, among a few other assignments. Before Day 1. Or you don't get in. Sheesh, Hack Reactor is not kidding around!
+So I lied when I said the program is only 3 months long. Our first several required assignments were due before Day 1 of the program, so we technically had an extra month. I won't give specific details because I think I'm bound to secrecy about their curriculum, but we each had to create a Twitter-like website, rewrite Javascript libraries from scratch, and even write a recursive JSON parser, among a couple other assignments. Before Day 1. Or you don't get in. Sheesh, Hack Reactor is not kidding around!
 
 I've now just wrapped up my 4th week of classes here. And it is intense. We have classes 6 days a week, from 9am to 8pm, and if you include the extra time you spend on homework, it's about 80-90 hours a week. Every 2 days, you get a new assignment (called a sprint) that you complete with a new assigned partner, and this goes on for the first 5 weeks. Then starting week 6 through the end of the program, you get longer-term group and individual projects to complete.
 

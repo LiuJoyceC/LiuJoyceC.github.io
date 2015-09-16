@@ -8,8 +8,8 @@ relative_permalinks: true
 
 # Setup
 title:            Joyce Liu
-tagline:          'Seattle Software Engineer'
-description:      'Software engineer and foreign language enthusiast living in Seattle'
+tagline:          'Seattle Software Developer'
+description:      'Software developer, math geek, and foreign language enthusiast living in Seattle'
 url:              liujoycec.github.io
 baseurl:          /
 picurl:           https://avatars2.githubusercontent.com/u/12114318?v=3&s=460
