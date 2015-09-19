@@ -72,6 +72,7 @@ html {
 
 .main-pic {
   margin: 10px auto;
+  border-radius: 50%;
 }
 
 /* Sidebar links */
@@ -264,4 +265,5 @@ a.sidebar-nav-item:focus {
 .theme-base-cust-01 .content a,
 .theme-base-cust-01 .related-posts li a:hover {
   color: #204B86;
+  background-color: #E0E0E0
 }
