@@ -257,6 +257,7 @@ a.sidebar-nav-item:focus {
 .theme-base-cust-01 .sidebar {
   background-image: url('http://cdn.slashgear.com/wp-content/uploads/2013/12/ocean-820x420.jpg');
   background-repeat: no-repeat;
+  height: 100%;
   background-size: 100%;
 }
 .theme-base-cust-01 .content a,
