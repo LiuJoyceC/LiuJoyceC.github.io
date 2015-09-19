@@ -266,6 +266,9 @@ a.sidebar-nav-item:focus {
   background-attachment: fixed;
   color: #F3F3F3;
 }
+.lead {
+  color: inherit;
+}
 .theme-base-cust-01 .content a,
 .theme-base-cust-01 .related-posts li a:hover {
   color: #204B86;
