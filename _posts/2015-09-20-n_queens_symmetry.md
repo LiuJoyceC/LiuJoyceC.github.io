@@ -19,9 +19,7 @@ For those that have not seen the N-Queens problem solved using [bitwise operatio
 
 After I had written my bitwise solution (which was indeed significantly faster than the non-bitwise solution I had written earlier), I later found [this blogpost by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/) which presents a Javascript version of the algorithm found in [this paper by Martin Richards](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.7113&rep=rep1&type=pdf) (N-Queens is discussed on pages 2-4 of the paper). I really recommend reading [Greg Trowbridge's post](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), because it does a great job of explaining how the bitwise solution works. For reference, this is the solution presented in the blogpost:
 
-<div class="message">
-  <pre>
-    <code>
+<div class="message"><pre><code>
 countNQueensSolutions = function(n) {
   //Keeps track of the # of valid solutions
   var count = 0;
@@ -56,9 +54,7 @@ countNQueensSolutions = function(n) {
 
   return count;
 };
-    </code>
-  </pre>
-</div>
+</code></pre></div>
 
 This solution uses a really cool optimization that my solution didn't have, in the line that says "<i>var bit = poss & -poss</i>". The variable <i>poss</i> uses the ones to
 
