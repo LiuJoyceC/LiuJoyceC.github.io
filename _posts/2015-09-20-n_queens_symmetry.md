@@ -13,47 +13,49 @@ The [N-Queens problem](https://en.wikipedia.org/wiki/Eight_queens_puzzle) is a p
 
 <div><img src="http://schinckel.net/images/2008/06/8queens.jpg"></div>
 
-For those that have not seen the N-Queens problem solved using [bitwise operation](https://en.wikipedia.org/wiki/Bitwise_operation), here's a brief summary of how the chessboard is represented. Bitwise operators are very fast because they directly operate on individual bits, and a squence of bits can visually represent a row on a chessboard, making binary operation ideal for the N-Queens problem. Let's use a 4x4 chessboard as an example. Each row in the chessboard is represented by a single binary number, which is just a sequence of bits. If a queen is placed in the leftmost square of a row, the row is represented by the number 8, which in binary is 1000. If a queen is in the 3rd square from the left, then the row is represented by 2, or 0010. The numbers other than 1, 2, 4, and 8 can be used to represent occupation in more than one square, such as 9 -> 1001, or 15 -> 1111. This is useful for marking squares which would cause conflict (squares which are in the same column or diagonal as another queen in a different row). For example, the number 5 (0101) would indicate that the only open squares left that won't conflict with other queens already on the board are the 1st and 3rd squares from the left, so those two squares will be the only ones where we try to place the next queen. When you get to a row where every square is in conflict (1111), then you know you've gone down the wrong path which will not lead to a valid solution, so you then backtrack up a row to place the previous queen somewhere else. If the previous queen can't be placed anywhere else, then you must keep backtracking up further to change other queens' positions until you find a solution where all the queens are happy :)
+For those that have not seen the N-Queens problem solved using [bitwise operation](https://en.wikipedia.org/wiki/Bitwise_operation), here's a brief summary of how the chessboard is represented. Bitwise operators are very fast because they directly operate on individual bits, and a squence of bits can visually represent a row on a chessboard, making bitwise operation ideal for the N-Queens problem. Let's use a 4x4 chessboard as an example. Each row in the chessboard is represented by a single binary number, which is just a sequence of bits. If a queen is placed in the leftmost square of a row, the row is represented by the number 8, which in binary is 1000. If a queen is in the 3rd square from the left, then the row is represented by 2, or 0010. The numbers other than 1, 2, 4, and 8 can be used to represent occupation in more than one square, such as 9 -> 1001, or 15 -> 1111. This is useful for marking squares which would cause conflict (squares which are in the same column or diagonal as another queen in a different row). For example, the number 5 (0101) would indicate that the only open squares left that won't conflict with other queens already on the board are the 1st and 3rd squares from the left, so those two squares will be the only ones where we try to place the next queen. When you get to a row where every square is in conflict (1111), then you know you've gone down the wrong path which will not lead to a valid solution, so you then backtrack up a row to place the previous queen somewhere else. If the previous queen can't be placed anywhere else, then you must keep backtracking up further to change other queens' positions until you find a solution where all the queens are happy :)
 
 ### A Great Bitwise Solution in Javascript
 
 After I had written my bitwise solution (which was indeed significantly faster than the non-bitwise solution I had written earlier), I later found [this blogpost by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/) which presents a Javascript version of the algorithm found in [this paper by Martin Richards](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.7113&rep=rep1&type=pdf) (N-Queens is discussed on pages 2-4 of the paper). I really recommend reading [Greg Trowbridge's post](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), because it does a great job of explaining how the bitwise solution works. For reference, this is the solution presented in the blogpost:
 
 <div class="message">
-countNQueensSolutions = function(n) {
-//Keeps track of the # of valid solutions
-var count = 0;
+  <pre>
+    <code>
+    countNQueensSolutions = function(n) {
+        //Keeps track of the # of valid solutions
+        var count = 0;
 
-//Helps identify valid solutions
-var done = Math.pow(2,n) - 1;
+        //Helps identify valid solutions
+        var done = Math.pow(2,n) - 1;
 
-//Checks all possible board configurations
-var innerRecurse = function(ld, col, rd) {
+        //Checks all possible board configurations
+        var innerRecurse = function(ld, col, rd) {
 
-//All columns are occupied,
-//so the solution must be complete
-if (col === done) {
-count++;
-return;
-}
+            //All columns are occupied,
+            //so the solution must be complete
+            if (col === done) {
+                count++;
+                return;
+            }
 
-//Gets a bit sequence with "1"s
-//whereever there is an open "slot"
-var poss = ~(ld | rd | col);
+            //Gets a bit sequence with "1"s
+            //whereever there is an open "slot"
+            var poss = ~(ld | rd | col);
 
-//Loops as long as there is a valid
-//place to put another queen.
-while ( poss & done ) {
-var bit = poss & -poss;
-poss -= bit;
-innerRecurse((ld|bit)>>1, col|bit, (rd|bit)<<1);
-}
-};
+            //Loops as long as there is a valid
+            //place to put another queen.
+            while ( poss & done ) {
+                var bit = poss & -poss;
+                poss -= bit;
+                innerRecurse((ld|bit)>>1, col|bit, (rd|bit)<<1);
+            }
+        };
 
-innerRecurse(0,0,0);
+        innerRecurse(0,0,0);
 
-return count;
-};
+        return count;
+    };
 </div>
 
 This solution uses a really cool optimization that my solution didn't have, in the line that says "<i>var bit = poss & -poss</i>". The variable <i>poss</i> uses the ones to
