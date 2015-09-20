@@ -5,21 +5,23 @@ title: Home
 
 <div class="posts">
   {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
+    {% if post.publish %}
+    <div class="post">
+      <h1 class="post-title">
+        <a href="{{ post.url }}">
+          {{ post.title }}
+        </a>
+      </h1>
 
-    <span class="post-date">{{ post.date | date_to_string }} - <span><a href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}"></a></span></span>
+      <span class="post-date">{{ post.date | date_to_string }} - <span><a href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}"></a></span></span>
 
-    {{ post.content }}
-    <!-- Disqus comment count -->
-    <div>
-      <a href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}"></a>
+      {{ post.content }}
+      <!-- Disqus comment count -->
+      <div>
+        <a href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}"></a>
+      </div>
     </div>
-  </div>
+    {% endif %}
   {% endfor %}
 </div>
 
