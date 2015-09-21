@@ -76,5 +76,56 @@ But that's ok, because we will find its mirror image, and multiply the count by 
 
 <div class="post-image"><img src="{{ site.baseurl }}public/images/5-Queen-excluded-Mirror.png"></div>
 
+However, this would cause us to double-count solutions where the queen in the first row is in the center square. The following solution and its mirror image would both be counted. And if we chose to exclude the middle square in the first row as well, then neither would be counted.
 
+<div class="post-image"><img src="{{ site.baseurl }}public/images/5-Queen-Middle-Solution.png"><img src="{{ site.baseurl }}public/images/5-Queen-Middle-Mirror.png"></div>
+
+So instead, we will add a filter to exclude the right half of the second row, which is only implemented when the queen in the first row is in the middle. We will not have to worry about the middle square in the second row because it is in conflict with the first queen, anyway. This way, we count exactly half of the solutions for which the first queen is in the middle, and we can multiply that count by 2.
+
+<div class="post-image"><img src="{{ site.baseurl }}public/images/5-Queen-Exclude-2nd-row.png"></div>
+
+Here is my revised version of the algorithm that was shown above:
+
+<div class="message"><pre><code>
+countNQueensSolutions = function(n) {
+//Keeps track of the # of valid solutions
+var count = 0;
+
+//Helps identify valid solutions
+var done = Math.pow(2,n) - 1;
+
+//Determines the positions in the first row
+//that will be excluded from our search
+//Also applies to the second row when N is
+//odd and the first queen is in the middle
+var excl = Math.pow(2, Math.floor(n/2)) - 1;
+
+//Checks all possible board configurations
+var innerRecurse = function(ld, col, rd) {
+
+//All columns are occupied,
+//so the solution must be complete
+if (col === done) {
+count++;
+return;
+}
+
+//Gets a bit sequence with "1"s
+//whereever there is an open "slot"
+var poss = ~(ld | rd | col);
+
+//Loops as long as there is a valid
+//place to put another queen.
+while ( poss & done ) {
+var bit = poss & -poss;
+poss -= bit;
+innerRecurse((ld|bit)>>1, col|bit, (rd|bit)<<1);
+}
+};
+
+innerRecurse(0,0,0);
+
+return count;
+};
+</code></pre></div>
 
