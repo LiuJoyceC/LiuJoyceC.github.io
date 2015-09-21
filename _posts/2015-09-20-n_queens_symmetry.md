@@ -17,7 +17,7 @@ For those that have not seen the N-Queens problem solved using [bitwise operatio
 
 For reference, [here is a list of the bitwise operators in Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
-### A Great Bitwise Solution in Javascript
+### A Great Bitwise Solution in Javascript...
 
 After I had written my bitwise solution (which was indeed significantly faster than the non-bitwise solution I had written earlier), I later found [this blogpost by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/) which presents a Javascript version of the algorithm found in [this paper by Martin Richards](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.7113&rep=rep1&type=pdf) (N-Queens is discussed on pages 2-4 of the paper). I really recommend reading [Greg Trowbridge's post](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), because it does a great job of explaining how the bitwise solution works.
 
@@ -60,4 +60,21 @@ countNQueensSolutions = function(n) {
 };
 </code></pre></div>
 
-This solution uses a really cool optimization that my solution didn't have, in the line that says "<i>var bit = poss & -poss</i>". In the binary representation of the variable <i>poss</i>, the zeroes denote spaces in conflict, and the ones are the remaining possibilities. With a simple binary operation, <i>bit</i> gives us the position of the first square from the right that is available, without having to iterate over each square to check if it's open like my original solution did. For example, if <i>poss</i> is 01010000, then <i>bit</i> is 00010000, and there was no need to waste time and computing resources on iterating over the first four spots to check if they are open. This saves a lot of time when you get to the lower rows where most of the squares have some conflict with queens in the rows above.
+In comparing my original solution to this one, I found a really cool optimization here that my solution didn't have, in the line that says "<i>var bit = poss & -poss</i>". In the binary representation of the variable <i>poss</i>, the zeroes denote spaces in conflict, and the ones are the remaining possibilities. With a simple binary operation, <i>bit</i> gives us the position of the first square from the right that is available, without having to iterate over each square to check if it's open. For example, if <i>poss</i> is 01010000, then <i>bit</i> is 00010000, and there was no need to waste time and computing resources on iterating over the first four spots to check if they are open (or rather, iterating over the powers of two, which represent the spots). This saves a lot of time when you get to the lower rows where most of the squares have some conflict with queens in the rows above.
+
+However, I noticed that this solution did not take advantage of one optimization: symmetry. So I decided to rewrite it to include this optimization.
+
+### ...And How I Improved Upon It Using Symmetry
+
+When we have a valid N-Queens solution, the mirror image of it will obviously still be a valid solution. What's more, this actually counts as a distinct solution from the first one, even though all we did was flip the board over! As long as we can be certain that no solution is identical to its mirror image and no mirror image is identical to any other solution we've found, then we can just find half of the solutions and multiply the count by 2. When N is even, we can just filter out one half of the first row, knowing that the solutions we miss out on will have their mirror images found when we explore the other half of the row. The case when N is odd is a tiny bit trickier, since we can't divide the odd number of squares in the first row by 2. For all solutions where the queen in the first row is not in the middle square, we can still find half of those solutions and multiply by 2. But it turns out we can do the same thing when the first row has it's middle square occupied. When there is a queen in middle square of the first row, then there can't be a queen in the middle square of the second row because then it would be in the same column as the first queen. Now there are an even number of squares in the second row that are still available! We can just exclude half of the squares in the second row so that we find exactly half of the solutions in which the first queen is in the middle. Add that to half of the solutions where the first queen is not in the middle, and we get exactly half of all solutions, which we then multiply by 2. Voila!
+
+We will exclude the right half of the first row. For odd N, this means up to, but not including, the middle square. That means that we will miss solutions such as the this one:
+
+<div class="post-image"><img src="{{ site.baseurl }}public/images/5-Queen-excluded-solution.png"></div>
+
+But that's ok, because we will find its mirror image, and multiply the count by 2:
+
+<div class="post-image"><img src="{{ site.baseurl }}public/images/5-Queen-excluded-Mirror.png"></div>
+
+
+
