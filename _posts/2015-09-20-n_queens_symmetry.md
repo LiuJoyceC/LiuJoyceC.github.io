@@ -87,45 +87,57 @@ So instead, we will add a filter to exclude the right half of the second row, wh
 Here is my revised version of the algorithm that was shown above:
 
 <div class="message"><pre><code>
-countNQueensSolutions = function(n) {
-//Keeps track of the # of valid solutions
-var count = 0;
+modifiedCountNQueensSolutions = function(n) {
+  //Keeps track of the # of valid solutions
+  var count = 0;
 
-//Helps identify valid solutions
-var done = Math.pow(2,n) - 1;
+  //Helps identify valid solutions
+  var done = Math.pow(2,n) - 1;
 
-//Determines the positions in the first row
-//that will be excluded from our search
-//Also applies to the second row when N is
-//odd and the first queen is in the middle
-var excl = Math.pow(2, Math.floor(n/2)) - 1;
+  //Determines the positions in the first row
+  //that will be excluded from our search
+  //Also applies to the second row when N is
+  //odd and the first queen is in the middle
+  var excl = Math.pow(2, Math.floor(n/2)) - 1;
 
-//Checks all possible board configurations
-var innerRecurse = function(ld, col, rd) {
+  //Checks all possible board configurations
+  //Added two parameters: ex1 will be used on
+  //the current row, ex2 is next in line
+  var innerRecurse = function(ld, col, rd, ex1, ex2) {
 
-//All columns are occupied,
-//so the solution must be complete
-if (col === done) {
-count++;
-return;
-}
+    //All columns are occupied,
+    //so the solution must be complete
+    if (col === done) {
+      count++;
+      return;
+    }
 
-//Gets a bit sequence with "1"s
-//whereever there is an open "slot"
-var poss = ~(ld | rd | col);
+    //Gets a bit sequence with "1"s
+    //whereever there is an open "slot"
+    //ex1 filters out right half of row
+    var poss = ~(ld | rd | col | ex1) & done;
 
-//Loops as long as there is a valid
-//place to put another queen.
-while ( poss & done ) {
-var bit = poss & -poss;
-poss -= bit;
-innerRecurse((ld|bit)>>1, col|bit, (rd|bit)<<1);
-}
-};
+    //Loops as long as there is a valid
+    //place to put another queen.
+    while (poss) {
+      var bit = poss & -poss;
+      poss = poss^bit;
 
-innerRecurse(0,0,0);
+      //ex2 will become the next row's ex1
+      //All rows after that will have ex1 = 0
+      innerRecurse((ld|bit)>>1, col|bit, (rd|bit)<<1, ex2, 0);
 
-return count;
+      //After we are past the middle square in the
+      //first row, disable filter for second row
+      x2 = 0;
+    }
+  };
+
+  //Second row filter active only for odd N
+  innerRecurse(0, 0, 0, excl, n%2 ? excl : 0);
+
+  //Multiply count by 2
+  return count*2;
 };
 </code></pre></div>
 
