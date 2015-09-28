@@ -139,7 +139,7 @@ modifiedCountNQueensSolutions = function(n) {
 
       //After we are past the middle square in the
       //first row, disable filter for second row
-      x2 = 0;
+      ex2 = 0;
     }
   };
 
@@ -151,6 +151,12 @@ modifiedCountNQueensSolutions = function(n) {
 };
 </code></pre></div>
 
-This solution only has three more lines of code than the first one shown above (it seems longer because of the additional comments), and to my surprise, it actually ran in <em>less than</em> half the time than the first solution. I had expected it to take slightly longer than half the time, because I figured the few extra steps it takes to optimize on symmetry would cause each recursive call to be slightly slower. 
+The major change that was made to the algorithm is the addition of the parameters <i>ex1</i> and <i>ex2</i> to the <i>innerRecurse</i> function. These are the exclusion filters for the current and next row of the chessboard. On our first call to <i>innerRecurse</i>, <i>ex1</i> is set to equal <i>excl</i> which is defined above to represent the squares in the right half of the row (up to but not including the middle square for odd N), so our first row in the chessboard will have the exclusion filter. <i>ex1</i> is then applied to the list of other conflict sequences (<i>ld</i>, <i>col</i>, <i>rd</i>) to eliminate unavailable spots in <i>poss</i>.
+
+<i>ex2</i> is not immediately applied, but the value stored at <i>ex2</i> is then passed in as the next <i>ex1</i> when we call <i>innerRecurse</i> again within itself, while 0 is passed in as the next <i>ex2</i> so all future calls will have <i>ex1</i> equal to 0. This ensures that the third row and beyond will not have the exclusion filter. On our first call of <i>innerRecurse</i>, <i>ex2</i> is set to 0 if N is even and set to <i>excl</i> if N is odd. This is because we only ever want to filter on the second row if N is odd. Furthermore, the filter should only apply to the second row when we have a queen in the middle square of the first row. Thanks to the filter in row 1, we start off the first row with the queen in the middle square. Before we move the queen in the first row to the next square, we set <i>ex2 = 0</i> right before the end of the while loop. Then the filter will no longer apply to the second row now that we've moved our queen in the first row past the middle square.
+
+### The Result
+
+This solution only has three more lines of code than the first one shown above (it seems longer because of the additional comments), and to my surprise, it actually ran in <em>less than</em> half the time than the first solution. I had expected it to take slightly longer than half the time, because I figured the few extra steps it takes to optimize on symmetry would cause each recursive call to be slightly slower. I made a few other micro-optimizations which I didn't think would make much of a difference, but I guess they were enough to more than make up for any time lost on performing the extra operations for the symmetry optimization. The micro-optimization that I believe to have made the most difference is eliminating the bitwise operation inside the while loop condition and, instead, performing that operation before the loop so it is not unnecessarily repeated.
 
 
