@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-publish: false
+publish: true
 title: Using Symmetry to Optimize an N-Queens Counting Algorithm
 ---
 
@@ -68,7 +68,7 @@ However, I noticed that this solution did not take advantage of one optimization
 
 ### ...And How I Improved Upon It Using Symmetry
 
-When we have a valid N-Queens solution, the mirror image of it will obviously still be a valid solution. What's more, this actually counts as a distinct solution from the first one, even though all we did was flip the board over! As long as we can be certain that no mirror image is identical to any other solution we've found, then we can just find half of the solutions and multiply the count by 2. When N is even, we can just filter out one half of the first row, knowing that the solutions we miss out on will have their mirror images found when we explore the other half of the row. The case when N is odd is a tiny bit trickier, since we can't divide the odd number of squares in the first row by 2. For all solutions where the queen in the first row is not in the middle square, we can still find half of those solutions and multiply by 2. But it turns out we can do the same thing when the first row has it's middle square occupied. When there is a queen in middle square of the first row, then there can't be a queen in the middle square of the second row because then it would be in the same column as the first queen. Now there are an even number of squares in the second row that are still available! We can just exclude half of the squares in the second row so that we find exactly half of the solutions in which the first queen is in the middle. Add that to half of the solutions where the first queen is not in the middle, and we get exactly half of all solutions, which we then multiply by 2. Voila!
+When we have a valid N-Queens solution, the mirror image of it will obviously still be a valid solution. What's more, this actually counts as a distinct solution from the first one, even though all we did was flip the board over! As long as we can be certain that no mirror image is identical to any other solution we've found, then we can just find half of the solutions and multiply the count by 2. When N is even, we can just filter out one half of the first row, knowing that the solutions we miss out on will have their mirror images found when we explore the other half of the row. The case when N is odd is a tiny bit trickier, since we can't divide the odd number of squares in the first row by 2. For all solutions where the queen in the first row is not in the middle square, we can still find half of those solutions and multiply by 2. But it turns out we can do the same thing when the first row has its middle square occupied. When there is a queen in the middle square of the first row, then there can't be a queen in the middle square of the second row because then it would be in the same column as the first queen. Now there are an even number of squares in the second row that are still available! We can just exclude half of the remaining squares in the second row so that we find exactly half of the solutions in which the first queen is in the middle. Add that to half of the solutions where the first queen is not in the middle, and we get exactly half of all solutions, which we then multiply by 2. Voila!
 
 To illustrate:
 
@@ -172,7 +172,7 @@ Here is a time comparison between the two algorithms (in milliseconds). For each
   <tr><th>16</th><td>27,152 ms</td><td>10,447 ms</td></tr>
 </tbody></table>
 
-For each N in the table, the modified algorithm, which takes advantage of symmetry and a few micro-optimizations, finishes in between a third to a half the amount of time that the unmodified algorithm takes. I originally intended to cut the time down by a half. Mission more than accomplished!
+For each N in the table, the modified algorithm, which takes advantage of symmetry and a few micro-optimizations, finishes in between a third to a half the amount of time that the unmodified algorithm takes. I originally intended to cut the time down by a half. Mission over-accomplished!
 
 Thanks for reading, and please feel free to leave comments or questions!
 
