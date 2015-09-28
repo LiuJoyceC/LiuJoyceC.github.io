@@ -101,14 +101,14 @@ modifiedCountNQueensSolutions = function(n) {
 
   //Helps identify valid solutions
   //Equivalent to Math.pow(2,n) - 1
-  var done = (1<<n) - 1;
+  var done = (1 << n) - 1;
 
   //Determines the positions in the first row
   //that will be excluded from our search
   //Also applies to the second row when N is
   //odd and the first queen is in the middle
   //Equivalent to Math.pow(2, Math.floor(n/2)) - 1
-  var excl = (1<<((n/2)^0)) - 1;
+  var excl = (1 << ((n/2)^0)) - 1;
 
   //Checks all possible board configurations
   //Added two parameters: ex1 will be used on
