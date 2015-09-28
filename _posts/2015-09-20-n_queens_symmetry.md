@@ -159,4 +159,20 @@ The major change that was made to the algorithm is the addition of the parameter
 
 This solution only has three more lines of code than the first one shown above (it seems longer because of the additional comments), and to my surprise, it actually ran in <em>less than</em> half the time than the first solution. I had expected it to take slightly longer than half the time, because I figured the few extra steps it takes to optimize on symmetry would cause each recursive call to be slightly slower. I made a few other micro-optimizations which I didn't think would make much of a difference, but I guess they were enough to more than make up for any time lost on performing the extra operations for the symmetry optimization. The micro-optimization that I believe to have made the most difference is eliminating the bitwise operation inside the while loop condition and, instead, performing that operation before the loop so it is not unnecessarily repeated.
 
+Here is a time comparison between the two algorithms (in milliseconds). For each N, I ran each algorithm 5-7 times and chose the median:
+
+<table><thead><tr><th>N</th><th>Unmodified Algorithm</th><th>Modified Algorithm</th></tr></thead>
+  <tbody><tr><th>9</th><td>Half a ms</td><td> < Half a ms</td></tr>
+  <tr><th>10</th><td>1 ms</td><td>Half a ms</td></tr>
+  <tr><th>11</th><td>6 ms</td><td>2 ms</td></tr>
+  <tr><th>12</th><td>24 ms</td><td>9 ms</td></tr>
+  <tr><th>13</th><td>114 ms</td><td>46 ms</td></tr>
+  <tr><th>14</th><td>667 ms</td><td>255 ms</td></tr>
+  <tr><th>15</th><td>4077 ms</td><td>1570 ms</td></tr>
+  <tr><th>16</th><td>27152 ms</td><td>10447 ms</td></tr>
+</tbody></table>
+
+
+
+
 
