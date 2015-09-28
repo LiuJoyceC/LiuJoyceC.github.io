@@ -168,8 +168,8 @@ Here is a time comparison between the two algorithms (in milliseconds). For each
   <tr><th>12</th><td>24 ms</td><td>9 ms</td></tr>
   <tr><th>13</th><td>114 ms</td><td>46 ms</td></tr>
   <tr><th>14</th><td>667 ms</td><td>255 ms</td></tr>
-  <tr><th>15</th><td>4077 ms</td><td>1570 ms</td></tr>
-  <tr><th>16</th><td>27152 ms</td><td>10447 ms</td></tr>
+  <tr><th>15</th><td>4,077 ms</td><td>1,570 ms</td></tr>
+  <tr><th>16</th><td>27,152 ms</td><td>10,447 ms</td></tr>
 </tbody></table>
 
 For each N in the table, the modified algorithm, which takes advantage of symmetry and a few micro-optimizations, finishes in between a third to a half the amount of time that the unmodified algorithm takes. Mission accomplished!
