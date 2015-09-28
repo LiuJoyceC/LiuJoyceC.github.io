@@ -5,7 +5,7 @@ publish: false
 title: Using Symmetry to Optimize an N-Queens Counting Algorithm
 ---
 
-Several weeks ago, I was introduced to the N-Queens problem, and I got to solve it using bitwise operation in Javascript. While it was fun to solve it on my own, I also wanted to see what existing efficient solutions were out there so I could learn how to improve my own algorithm. I stumbled upon [this blog by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), which presents a Javascript variation of the N-Queens counting algorithm found in [a paper by Martin Richards](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.7113&rep=rep1&type=pdf) (N-Queens is discussed on pages 2-4 of the paper). This algorithm is highly efficient and has some really cool optimizations that mine didn't have, but I noticed that it didn't take advantage of any symmetry optimizations. Thus began my quest to modify an already awesomely efficient algorithm in order to cut its time down by a half...
+Several weeks ago, I was introduced to the N-Queens counting problem, and I got to solve it using bitwise operation in Javascript. While it was fun to solve it on my own, I also wanted to see what existing efficient solutions were out there so I could learn how to improve my own algorithm. I stumbled upon [this blog by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), which presents a Javascript variation of the N-Queens counting algorithm found in [a paper by Martin Richards](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.7113&rep=rep1&type=pdf) (N-Queens is discussed on pages 2-4 of the paper). This algorithm is highly efficient and has some really cool optimizations that mine didn't have, but I noticed that it didn't take advantage of any symmetry optimizations. Thus began my quest to modify an already awesomely efficient algorithm in order to cut its time down by a half...
 
 This next section gives a brief introduction to the N-Queens puzzle and how bitwise operation can be used to represent a chessboard. If you are already familiar with these, feel free to skip to the section after it.
 
@@ -21,7 +21,7 @@ For reference, [here is a list of the bitwise operators in Javascript](https://d
 
 ### A Great Bitwise Solution in Javascript...
 
-I highly recommend reading the above mentioned [blogpost by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), as the algorithm presented in it is pretty nifty, and the blogpost does a great job of thoroughly explaining how it works. The next section will assume you understand how this algorithm works, so it's a great idea to read the blogpost if you don't.
+I highly recommend reading the above mentioned [blogpost by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), as the algorithm presented in it is pretty nifty, and the blogpost does a great job of thoroughly explaining how it works. The next section will assume you understand how this algorithm works, so it's a good idea to read the blogpost if you don't.
 
 For reference, this is the solution presented in the blogpost:
 
@@ -157,9 +157,9 @@ The major change that was made to the algorithm is the addition of the parameter
 
 ### The Result
 
-This solution only has three more lines of code than the first one shown above (it seems longer because of the additional comments), and to my surprise, it actually ran in <em>less than</em> half the time than the first solution. I had expected it to take slightly longer than half the time, because I figured the few extra steps it takes to optimize on symmetry would cause each recursive call to be slightly slower. I made a few other micro-optimizations which I didn't think would make much of a difference, but I guess they were enough to more than make up for any time lost on performing the extra operations for the symmetry optimization. The micro-optimization that I believe to have made the most difference is eliminating the bitwise operation inside the while loop condition and, instead, performing that operation before the loop so it is not unnecessarily repeated.
+This solution only has three more lines of code than the first one shown above (it seems longer because of the additional comments), and to my surprise, it actually ran in <em>less than</em> half the time than the first solution. I had expected it to take a little longer than half the time, because I figured the few extra steps it takes to optimize on symmetry would cause each recursive call to be slightly slower. I made a few other micro-optimizations which I didn't think would make much of a difference, but I guess they were enough to more than make up for any time lost on performing the extra operations for the symmetry optimization. The micro-optimization that I believe to have made the most difference is eliminating the bitwise operation inside the while loop condition and, instead, performing that operation before the loop so it is not unnecessarily repeated.
 
-Here is a time comparison between the two algorithms (in milliseconds). For each N, I ran each algorithm 5-7 times and chose the median:
+Here is a time comparison between the two algorithms (in milliseconds). For each N, I ran each algorithm 5-7 times in the Chrome browser console on my laptop, and I chose the median time for each:
 
 <table><thead><tr><th>N</th><th>Unmodified Algorithm</th><th>Modified Algorithm</th></tr></thead>
   <tbody><tr><th>9</th><td>Half a ms</td><td> < Half a ms</td></tr>
@@ -172,7 +172,7 @@ Here is a time comparison between the two algorithms (in milliseconds). For each
   <tr><th>16</th><td>27,152 ms</td><td>10,447 ms</td></tr>
 </tbody></table>
 
-For each N in the table, the modified algorithm, which takes advantage of symmetry and a few micro-optimizations, finishes in between a third to a half the amount of time that the unmodified algorithm takes. Mission accomplished!
+For each N in the table, the modified algorithm, which takes advantage of symmetry and a few micro-optimizations, finishes in between a third to a half the amount of time that the unmodified algorithm takes. I originally intended to cut the time down by a half. Mission more than accomplished!
 
 Thanks for reading, and please feel free to leave comments or questions!
 
