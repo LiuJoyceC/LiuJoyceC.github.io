@@ -5,6 +5,9 @@ publish: true
 title: Using Symmetry to Optimize an N-Queens Counting Algorithm
 ---
 
+November 7, 2015 Update: I have now created an interactive visualization tool to walk you through the execution of my algorithm for those of you who are visual learners or those of you who just like cool stuff. Check it out! [http://LiuJoyceC.github.io/N-Queens-Recursion-Visualizer](http://LiuJoyceC.github.io/N-Queens-Recursion-Visualizer). If you haven't yet read this post to learn about my awesome N-Queens counting algorithm, I hope you enjoy it!
+
+
 Several weeks ago, I was introduced to the N-Queens counting problem, and I got to solve it using bitwise operation in Javascript. While it was fun to solve it on my own, I also wanted to see what existing efficient solutions were out there so I could learn how to improve my own algorithm. I stumbled upon [this blog by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/), which presents a Javascript variation of the N-Queens counting algorithm found in [a paper by Martin Richards](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.51.7113&rep=rep1&type=pdf) (N-Queens is discussed on pages 2-4 of the paper). This algorithm is highly efficient and has some really cool optimizations that mine didn't have, but I noticed that it didn't take advantage of any symmetry optimizations. Thus began my quest to modify an already awesomely efficient algorithm in order to cut its time down by a half...
 
 This next section gives a brief introduction to the N-Queens puzzle and how bitwise operation can be used to represent a chessboard. If you are already familiar with these, feel free to skip to the section after it.
@@ -95,7 +98,7 @@ modifiedCountNQueensSolutions = function(n) {
   //Symmetry will not work for N=1 and N=0 because
   //the one solution's mirror image is itself
   if (n === 0 || n === 1) return 1;
-  
+
   //Keeps track of the # of valid solutions
   var count = 0;
 
